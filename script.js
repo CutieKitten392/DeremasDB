@@ -228,10 +228,21 @@ function submitIdolSearchForm() {
 	$.getJSON("idoldata.json", function(data) {
 		var result = new Array();
 		$.each(data.data, function(index, val) {
+			
+			if(opt.type != "%" && opt.type != val.type) {
+				return true;
+			}
+			if(opt.rare != "%" && opt.rare !== val.rare) {
+				return true;
+			}
+			if(opt.cost != "%" && opt.cost != val.cost) {
+				return true;
+			}
+			
 			result.push(val);
 		});
 		
-				// HTML形成
+		// HTML形成
 		var elm = "";
 		elm += '<div id="count" class="panel-heading" style="padding:5px">';
 		elm += '検索結果 ' + result.length + '件';

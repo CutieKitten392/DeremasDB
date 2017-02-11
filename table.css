@@ -1,83 +1,35 @@
-/* ƒe[ƒuƒ‹FƒLƒ…[ƒgs */
+/* ãƒ†ãƒ¼ãƒ–ãƒ«ï¼šã‚­ãƒ¥ãƒ¼ãƒˆè¡Œ */
 tr.cute {
 	background-color : #FFEEFF;
 	cursor : default;
 }
-/* ƒe[ƒuƒ‹FƒLƒ…[ƒgsiƒ}ƒEƒXƒI[ƒo[j */
+/* ãƒ†ãƒ¼ãƒ–ãƒ«ï¼šã‚­ãƒ¥ãƒ¼ãƒˆè¡Œï¼ˆãƒã‚¦ã‚¹ã‚ªãƒ¼ãƒãƒ¼ï¼‰ */
 tr.cute:hover {
 	background-color : #FFCCFF;
 }
-/* ƒe[ƒuƒ‹FƒLƒ…[ƒgsiƒAƒNƒeƒBƒuj */
-tr.cute:active {
-	background-color : #FFAAFF;
-}
-/* ƒe[ƒuƒ‹FƒLƒ…[ƒgsi‘I‘ğÏ‚İj */
-tr.cute.selected {
-	background-color : #FFAAFF;
-}
-/* ƒe[ƒuƒ‹FƒN[ƒ‹s */
+/* ãƒ†ãƒ¼ãƒ–ãƒ«ï¼šã‚¯ãƒ¼ãƒ«è¡Œ */
 tr.cool {
 	background-color : #DDFFFF;
 	cursor : default;
 }
-/* ƒe[ƒuƒ‹FƒN[ƒ‹siƒ}ƒEƒXƒI[ƒo[j */
+/* ãƒ†ãƒ¼ãƒ–ãƒ«ï¼šã‚¯ãƒ¼ãƒ«è¡Œï¼ˆãƒã‚¦ã‚¹ã‚ªãƒ¼ãƒãƒ¼ï¼‰ */
 tr.cool:hover {
 	background-color : #AAEEFF;
 }
-/* ƒe[ƒuƒ‹FƒN[ƒ‹siƒAƒNƒeƒBƒuj */
-tr.cool:active {
-	background-color : #88DDFF;
-}
-/* ƒe[ƒuƒ‹FƒN[ƒ‹si‘I‘ğÏ‚İj */
-tr.cool.selected {
-	background-color : #88DDFF;
-}
-/* ƒe[ƒuƒ‹FƒpƒbƒVƒ‡ƒ“s */
+/* ãƒ†ãƒ¼ãƒ–ãƒ«ï¼šãƒ‘ãƒƒã‚·ãƒ§ãƒ³è¡Œ */
 tr.passion {
 	background-color : #FFEEDD;
 	cursor : default;
 }
-/* ƒe[ƒuƒ‹FƒpƒbƒVƒ‡ƒ“siƒ}ƒEƒXƒI[ƒo[j */
+/* ãƒ†ãƒ¼ãƒ–ãƒ«ï¼šãƒ‘ãƒƒã‚·ãƒ§ãƒ³è¡Œï¼ˆãƒã‚¦ã‚¹ã‚ªãƒ¼ãƒãƒ¼ï¼‰ */
 tr.passion:hover {
 	background-color : #FFDDAA;
 }
-/* ƒe[ƒuƒ‹FƒpƒbƒVƒ‡ƒ“siƒAƒNƒeƒBƒuj */
-tr.passion:active {
-	background-color : #FFBB88;
-}
-/* ƒe[ƒuƒ‹FƒpƒbƒVƒ‡ƒ“si‘I‘ğÏ‚İj */
-tr.passion.selected {
-	background-color : #FFBB88;
-}
-/* ƒe[ƒuƒ‹FƒgƒŒ[ƒi[ */
+/* ãƒ†ãƒ¼ãƒ–ãƒ«ï¼šãƒˆãƒ¬ãƒ¼ãƒŠãƒ¼ */
 tr.trainer {
 	background-color : #DDFFDD;
 }
-/* ƒe[ƒuƒ‹FƒgƒŒ[ƒi[iƒ}ƒEƒXƒI[ƒo[j */
+/* ãƒ†ãƒ¼ãƒ–ãƒ«ï¼šãƒˆãƒ¬ãƒ¼ãƒŠãƒ¼ï¼ˆãƒã‚¦ã‚¹ã‚ªãƒ¼ãƒãƒ¼ï¼‰ */
 tr.trainer:hover {
 	background-color : #AAFFAA;
-}
-/* ƒe[ƒuƒ‹FƒgƒŒ[ƒi[iƒAƒNƒeƒBƒuj */
-tr.trainer:active {
-	background-color : #88EE88;
-}
-/* ƒe[ƒuƒ‹FƒgƒŒ[ƒi[i‘I‘ğÏ‚İj */
-tr.trainer.selected {
-	background-color : #88EE88;
-}
-
-/* ƒ_ƒEƒ“ƒ[ƒhi’»ƒo[ */
-#dw-progress {
-	background-color : #333333;
-	width : 270px;
-	height : 15px;
-	padding : 0:
-}
-
-/* ƒ_ƒEƒ“ƒ[ƒhi’»ƒo[i’†gj */
-#dw-progress-inner {
-	background-color : #7788FF;
-	width : 0px;
-	height : 15px;
-	margin : 0;
 }
