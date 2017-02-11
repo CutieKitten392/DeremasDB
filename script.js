@@ -246,7 +246,9 @@ function submitIdolSearchForm() {
 		});
 		elm += '</tr>';
 		$.each(result, function(index, val) {
-			return opt.limit != index;
+			if(opt.limit == index) {
+				return false;
+			}
 			var className;
 			switch(val.type) {
 				case 'ｷｭｰﾄ'  : className = 'cute'; break;
