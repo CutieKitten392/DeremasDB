@@ -227,11 +227,12 @@ function submitIdolSearchForm() {
 	opt.limit = $('#limit')[0].value;
 	var result = new Array();
 	$.getJSON("idoldata.json", function(data) {
+		console.log(data);
 		$.each(data.data, function(index, val) {
 			result.push(val);
 		});
 	});
-	console.debug(result);
+	console.log(result);
 	
 	// HTML形成
 	var elm = "";
