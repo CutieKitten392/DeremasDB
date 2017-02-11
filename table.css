@@ -1,0 +1,83 @@
+/* テーブル：キュート行 */
+tr.cute {
+	background-color : #FFEEFF;
+	cursor : default;
+}
+/* テーブル：キュート行（マウスオーバー） */
+tr.cute:hover {
+	background-color : #FFCCFF;
+}
+/* テーブル：キュート行（アクティブ） */
+tr.cute:active {
+	background-color : #FFAAFF;
+}
+/* テーブル：キュート行（選択済み） */
+tr.cute.selected {
+	background-color : #FFAAFF;
+}
+/* テーブル：クール行 */
+tr.cool {
+	background-color : #DDFFFF;
+	cursor : default;
+}
+/* テーブル：クール行（マウスオーバー） */
+tr.cool:hover {
+	background-color : #AAEEFF;
+}
+/* テーブル：クール行（アクティブ） */
+tr.cool:active {
+	background-color : #88DDFF;
+}
+/* テーブル：クール行（選択済み） */
+tr.cool.selected {
+	background-color : #88DDFF;
+}
+/* テーブル：パッション行 */
+tr.passion {
+	background-color : #FFEEDD;
+	cursor : default;
+}
+/* テーブル：パッション行（マウスオーバー） */
+tr.passion:hover {
+	background-color : #FFDDAA;
+}
+/* テーブル：パッション行（アクティブ） */
+tr.passion:active {
+	background-color : #FFBB88;
+}
+/* テーブル：パッション行（選択済み） */
+tr.passion.selected {
+	background-color : #FFBB88;
+}
+/* テーブル：トレーナー */
+tr.trainer {
+	background-color : #DDFFDD;
+}
+/* テーブル：トレーナー（マウスオーバー） */
+tr.trainer:hover {
+	background-color : #AAFFAA;
+}
+/* テーブル：トレーナー（アクティブ） */
+tr.trainer:active {
+	background-color : #88EE88;
+}
+/* テーブル：トレーナー（選択済み） */
+tr.trainer.selected {
+	background-color : #88EE88;
+}
+
+/* ダウンロード進捗バー */
+#dw-progress {
+	background-color : #333333;
+	width : 270px;
+	height : 15px;
+	padding : 0:
+}
+
+/* ダウンロード進捗バー（中身） */
+#dw-progress-inner {
+	background-color : #7788FF;
+	width : 0px;
+	height : 15px;
+	margin : 0;
+}
