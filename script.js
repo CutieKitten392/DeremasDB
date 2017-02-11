@@ -244,7 +244,7 @@ function submitIdolSearchForm() {
 	var column = ['タイプ', 'レア度', 'アイドル名', 'コスト', '攻', '守', '最大攻', '最大守', '特技名', '特技効果', '追加日'];
 	$.each(column, function(index, val) {
 		elm += '<th>' + val + '</th>';
-	}
+	});
 	elm += '</tr>';
 	$.each(result, function(index, val) {
 		return opt.limit != index;
