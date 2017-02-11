@@ -1,0 +1,198 @@
+<html>
+	<head>
+		<title>IDOL DATABASE</title>
+		<meta http-equiv="content-type" content="text/html;charset=utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="shortcut icon" href="icon.ico" >
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+		<link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
+		<link rel="stylesheet" href="table.css" />
+		<script type="text/javascript" src="//code.jquery.com/jquery-3.1.1.min.js"></script>
+		<script type="text/javascript" src="//code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+		<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1/i18n/jquery.ui.datepicker-ja.min.js"></script>
+		<script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="//stuk.github.io/dist/jszip.min.js"></script>
+		<script type="text/javascript" src="//stuk.github.io/jszip-utils/dist/jszip-utils.min.js"></script>
+		<script type="text/javascript" src="//stuk.github.io/vendor/FileSaver.js"></script>
+		<script type="text/javascript" src="script.js"></script>
+		<script type="text/javascript">
+			$(function() {
+				// Datepicker設定
+				$.datepicker.setDefaults( $.datepicker.regional[ "ja" ] );
+				$( ".datepicker" ).datepicker();
+
+				// 二重クリック抑止関数設定
+				$('.double-click-disable').on('click', function(elm) {
+					//console.log('execute');
+					//console.log(elm.target);
+					elm.target.disabled = 'disabled';
+					setTimeout(function(elm) {
+						elm.target.disabled = '';
+					}, '500', elm);
+				});
+
+				// チェックボックスイベント設定
+				$("input.chk").on('keydown', function(event) {
+					return checkEnter(event);
+				});
+
+				// リサイズイベント
+				window.onresize = function() {
+
+				};
+			});
+		</script>
+	</head>
+
+	<body onload="submitIdolSearchForm();">
+
+		<ol class="breadcrumb" style="margin:0">
+			<li><a href="index.php"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> TOP</a></li>
+			<li class="active">IDOL DATABASE</li>
+		</ol>
+
+		<div class="panel panel-primary" style="margin:0">
+			<div class="panel-heading" style="padding:1px 0 6px 10px">
+				<h3><strong>IDOL DATABASE</strong></h3>
+			</div>
+
+			<div class="panel-body">
+
+				<div class="tab-content">
+
+					<!-- 検索フォーム -->
+					<div id="search-form" class="panel panel-primary tab-pane active fade in" style="margin-top:14px">
+						<div class="panel-heading" style="padding:5px">検索フォーム</div>
+						<div class="panel-body">
+							<form class="form-inline" onsubmit="return submitIdolSearchForm();" style="margin:0">
+								<div style="margin-bottom:5px">
+									<div class="input-group" style="margin-bottom:5px">
+										<span class="input-group-addon">タイプ</span>
+										<select id="type" class="form-control">
+											<option value="%" >指定なし
+											<option value="ｷｭｰﾄ" >キュート
+											<option value="ｸｰﾙ" >クール
+											<option value="ﾊﾟｯｼｮﾝ" >パッション
+										</select>
+									</div>
+									<div class="input-group" style="margin-bottom:5px">
+										<span class="input-group-addon">レア度</span>
+										<select id="rare" class="form-control">
+											<option value="%" >指定なし
+											<option value="N" >N
+											<option value="N+" >N+
+											<option value="R" >R
+											<option value="R+" >R+
+											<option value="SR" >SR
+											<option value="SR+" >SR+
+										</select>
+									</div>
+									<div class="input-group" style="margin-bottom:5px">
+										<span class="input-group-addon">コスト</span>
+										<select id="cost" class="form-control">
+											<option value="%" >指定なし
+											
+										</select>
+									</div>
+									<div class="input-group" style="margin-bottom:5px">
+										<span class="input-group-addon">アイドル名</span>
+										<input type="text" id="name" class="form-control" size="15" />
+									</div>
+									<div class="input-group" style="margin-bottom:5px">
+										<span class="input-group-addon">検索タイプ</span>
+										<select id="select" class="form-control">
+											<option value="AND"  >AND
+											<option value="OR"  >OR
+										</select>
+									</div>
+									<div class="input-group" style="margin-bottom:5px">
+										<span class="input-group-addon">ソート条件</span>
+										<span>
+											<select id="sort" class="form-control">
+												<option value="no" >NO
+												<option value="cost" >コスト
+												<option value="atk" >攻撃値
+												<option value="def" >守備値
+												<option value="atk+def" >総合値
+												<option value="max_atk" >最大攻撃値
+												<option value="max_def" >最大守備値
+												<option value="max_atk+max_def" >最大総合値
+												<option value="atk/cost" >攻コス比
+												<option value="def/cost" >守コス比
+												<option value="(atk+def)/cost" >総コス比
+												<option value="max_atk/cost" >最大攻コス比
+												<option value="max_def/cost" >最大守コス比
+												<option value="(max_atk+max_def)/cost" >最大総コス比
+												<option value="date" >追加日
+											</select>
+											<select id="sort2" class="form-control">
+												<option value="asc" >昇順
+												<option value="desc" >降順
+											</select>
+										</span>
+									</div>
+									<div class="input-group" style="margin-bottom:5px">
+										<span class="input-group-addon">表示件数</span>
+										<select id="limit" class="form-control">
+											<option value="10" >10件
+											<option value="50" >50件
+											<option value="100" >100件
+											<option value="500" >500件
+											<option value="1000" >1000件
+											<option value="100000" >全件
+										</select>
+									</div>
+								</div>
+								<button type="submit" id="search-decide" class="btn btn-primary">検索</button>
+								<button type="button" class="btn btn-default" onclick="resetIdolSearchForm()">リセット</button>
+							</form>
+						</div>
+					</div>
+
+				</div>
+
+				<!-- データテーブル表示 -->
+				<div id="tableArea" class="panel panel-primary">
+					<span id="count"></span>
+				</div>
+
+			</div>
+		</div>
+
+		<!-- 画像 -->
+		<div id="image" class="modal fade">
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content">
+					<div class="modal-header">
+						<ul class="nav nav-pills">
+							<li id="img-tab-default" class="active"><a href="#image-large" data-toggle="tab">大サイズ画像</a></li>
+							<li><a href="#image-middle" data-toggle="tab">中サイズ画像</a></li>
+							<li><a href="#image-small" data-toggle="tab">小サイズ画像</a></li>
+							<li><a href="#image-quest" data-toggle="tab">お仕事画像</a></li>
+						</ul>
+					</div>
+					<div class="modal-body">
+						<div class="tab-content">
+							<div id="image-large" class="center-block tab-pane fade active in" style="height:75%">
+								<img id="sign_p" class="center-block" height="100%" onclick="imgChange()" style="display:block;">
+								<img id="sign_b" class="center-block" height="100%" onclick="imgChange()" style="display:none;">
+								<img id="large" class="center-block" height="100%" onclick="imgChange()" style="display:none;">
+								<img id="noframe" class="center-block" height="100%" onclick="imgChange()" style="display:none;">
+							</div>
+							<div id="image-middle" class="center-block tab-pane fade" style="height:75%">
+								<img id="middle" class="center-block">
+							</div>
+							<div id="image-small" class="center-block tab-pane fade" style="height:75%">
+								<img id="small" class="center-block">
+							</div>
+							<div id="image-quest" class="center-block tab-pane fade" style="height:75%">
+								<img id="quest" class="center-block">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</body>
+</html>
