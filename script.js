@@ -225,87 +225,85 @@ function submitIdolSearchForm() {
 	opt.sort = $('#sort')[0].value;
 	opt.sort2 = $('#sort2')[0].value;
 	opt.limit = $('#limit')[0].value;
-	var result = new Array();
 	$.getJSON("idoldata.json", function(data) {
-		console.log(data);
+		var result = new Array();
 		$.each(data.data, function(index, val) {
-			console.log(val);
 			result.push(val);
 		});
+		
+				// HTML形成
+		var elm = "";
+		elm += '<div id="count" class="panel-heading" style="padding:5px">';
+		elm += '検索結果 ' + result.length + '件';
+		elm += '</div>';
+		elm += '<div class="panel-body">';
+		elm += '<div class="table-responsive">';
+		elm += '<table id="table" border=1 class="table table-condensed table-bordered" cellpadding=2 cellspacing=0 width=100%>';
+		elm += '<tr class="bg-primary">';
+		var column = ['タイプ', 'レア度', 'アイドル名', 'コスト', '攻', '守', '最大攻', '最大守', '特技名', '特技効果', '追加日'];
+		$.each(column, function(index, val) {
+			elm += '<th>' + val + '</th>';
+		});
+		elm += '</tr>';
+		$.each(result, function(index, val) {
+			return opt.limit != index;
+			var className;
+			switch(val.type) {
+				case 'ｷｭｰﾄ'  : className = 'cute'; break;
+				case 'ｸｰﾙ'   : className = 'cool'; break;
+				case 'ﾊﾟｯｼｮﾝ': className = 'passion'; break;
+			}
+			if(val.cost == 999) {
+				className = 'trainer';
+			}
+			var atk_rate = Math.round( val.max_atk / val.cost , 1 );
+			var def_rate = Math.round( val.max_def / val.cost , 1 );
+			elm += '<tr class="' + className + '" onclick="selectIdol(this)">';
+			elm += "<td hidden>" + val.no + "</td>";
+			elm += "<td hidden>" + val.id + "</td>";
+			elm += "<td>" + val.type + "</td>";
+			elm += "<td>" + val.rare + "</td>";
+			elm += "<td><a href='#' onclick='imgDisplay(this); return false;'>" + val.name + "</a></td>";
+			elm += "<td>" + val.cost + "</td>";
+			elm += "<td>" + val.atk + "</td>";
+			elm += "<td>" + val.def + "</td>";
+			elm += "<td>" + val.max_atk + "</td>";
+			elm += "<td>" + val.max_def + "</td>";
+			elm += "<td hidden>" + val.atk_rate + "</td>";
+			elm += "<td hidden>" + val.def_rate + "</td>";
+			elm += "<td>" + val.skill_name + "</td>";
+			elm += "<td>" + val.skill_effect + "</td>";
+			elm += "<td hidden align=center>";
+			elm += "<div class='btn-group btn-group-xs'>";
+			elm += "<button type='button' class='btn btn-default dropdown-toggle' data-toggle='dropdown' aria-expanded='false'>";
+			elm += "選択<span class='caret'></span>";
+			elm += "</button>";
+			elm += "<ul class='dropdown-menu' role='menu'>";
+			elm += "<li role='presentation'><a role='menuitem' tabindex='-1' href='#' size='large' hash='l/" + val.hash + "' exp='jpg' onclick='return imgDisplay(this);'>大サイズ</a></li>";
+			elm += "<li role='presentation'><a role='menuitem' tabindex='-1' href='#' size='middle' hash='ls/" + val.hash + "' exp='jpg' onclick='return imgDisplay(this);'>中サイズ</a></li>";
+			elm += "<li role='presentation'><a role='menuitem' tabindex='-1' href='#' size='small' hash='xs/" + val.hash + "' exp='jpg' onclick='return imgDisplay(this);'>小サイズ</a></li>";
+			if(val.rare == 'SR' || val.rare == 'SR+') {
+				elm += "<li role='presentation'><a role='menuitem' tabindex='-1' href='#' size='quest' hash='quest/" + val.hash + "' exp='jpg' onclick='return imgDisplay(this);'>お仕事</a></li>";
+				elm += "<li role='presentation'><a role='menuitem' tabindex='-1' href='#' size='large' hash='l_noframe/" + val.hash + "' exp='jpg' onclick='return imgDisplay(this);'>枠なし</a></li>";
+			} else {
+				elm += "<li role='presentation'><a role='menuitem' tabindex='-1' href='#' size='quest' hash='quest/" + val.hash + "' exp='png' onclick='return imgDisplay(this);'>お仕事</a></li>";
+			}
+			elm += "</ul>";
+			elm += "</div>";
+			elm += "<td hidden>" + val.max_lv + "</td><td hidden>" + val.max_love + "</td>";
+			elm += "<td hidden>" + val.skill_id + "</td><td hidden>" + val.hash + "</td>";
+			elm += "<td>" + val.date + "</td></tr>";
+		});
+		elm += '</table>';
+		elm += '</div>';
+		elm += '</div>';
+		
+		// 生成した要素を表示
+		$("#tableArea").html(elm);
+		// 検索ボタンを使用可能にする
+		$("#search-decide")[0].disabled = "";
+
 	});
-	console.log(result);
-	
-	// HTML形成
-	var elm = "";
-	elm += '<div id="count" class="panel-heading" style="padding:5px">';
-	elm += '検索結果 ' + result.length + '件';
-	elm += '</div>';
-	elm += '<div class="panel-body">';
-	elm += '<div class="table-responsive">';
-	elm += '<table id="table" border=1 class="table table-condensed table-bordered" cellpadding=2 cellspacing=0 width=100%>';
-	elm += '<tr class="bg-primary">';
-	var column = ['タイプ', 'レア度', 'アイドル名', 'コスト', '攻', '守', '最大攻', '最大守', '特技名', '特技効果', '追加日'];
-	$.each(column, function(index, val) {
-		elm += '<th>' + val + '</th>';
-	});
-	elm += '</tr>';
-	$.each(result, function(index, val) {
-		return opt.limit != index;
-		var className;
-		switch(val.type) {
-			case 'ｷｭｰﾄ'  : className = 'cute'; break;
-			case 'ｸｰﾙ'   : className = 'cool'; break;
-			case 'ﾊﾟｯｼｮﾝ': className = 'passion'; break;
-		}
-		if(val.cost == 999) {
-			className = 'trainer';
-		}
-		var atk_rate = Math.round( val.max_atk / val.cost , 1 );
-		var def_rate = Math.round( val.max_def / val.cost , 1 );
-		elm += '<tr class="' + className + '" onclick="selectIdol(this)">';
-		elm += "<td hidden>" + val.no + "</td>";
-		elm += "<td hidden>" + val.id + "</td>";
-		elm += "<td>" + val.type + "</td>";
-		elm += "<td>" + val.rare + "</td>";
-		elm += "<td><a href='#' onclick='imgDisplay(this); return false;'>" + val.name + "</a></td>";
-		elm += "<td>" + val.cost + "</td>";
-		elm += "<td>" + val.atk + "</td>";
-		elm += "<td>" + val.def + "</td>";
-		elm += "<td>" + val.max_atk + "</td>";
-		elm += "<td>" + val.max_def + "</td>";
-		elm += "<td hidden>" + val.atk_rate + "</td>";
-		elm += "<td hidden>" + val.def_rate + "</td>";
-		elm += "<td>" + val.skill_name + "</td>";
-		elm += "<td>" + val.skill_effect + "</td>";
-		elm += "<td hidden align=center>";
-		elm += "<div class='btn-group btn-group-xs'>";
-		elm += "<button type='button' class='btn btn-default dropdown-toggle' data-toggle='dropdown' aria-expanded='false'>";
-		elm += "選択<span class='caret'></span>";
-		elm += "</button>";
-		elm += "<ul class='dropdown-menu' role='menu'>";
-		elm += "<li role='presentation'><a role='menuitem' tabindex='-1' href='#' size='large' hash='l/" + val.hash + "' exp='jpg' onclick='return imgDisplay(this);'>大サイズ</a></li>";
-		elm += "<li role='presentation'><a role='menuitem' tabindex='-1' href='#' size='middle' hash='ls/" + val.hash + "' exp='jpg' onclick='return imgDisplay(this);'>中サイズ</a></li>";
-		elm += "<li role='presentation'><a role='menuitem' tabindex='-1' href='#' size='small' hash='xs/" + val.hash + "' exp='jpg' onclick='return imgDisplay(this);'>小サイズ</a></li>";
-		if(val.rare == 'SR' || val.rare == 'SR+') {
-			elm += "<li role='presentation'><a role='menuitem' tabindex='-1' href='#' size='quest' hash='quest/" + val.hash + "' exp='jpg' onclick='return imgDisplay(this);'>お仕事</a></li>";
-			elm += "<li role='presentation'><a role='menuitem' tabindex='-1' href='#' size='large' hash='l_noframe/" + val.hash + "' exp='jpg' onclick='return imgDisplay(this);'>枠なし</a></li>";
-		} else {
-			elm += "<li role='presentation'><a role='menuitem' tabindex='-1' href='#' size='quest' hash='quest/" + val.hash + "' exp='png' onclick='return imgDisplay(this);'>お仕事</a></li>";
-		}
-		elm += "</ul>";
-		elm += "</div>";
-		elm += "<td hidden>" + val.max_lv + "</td><td hidden>" + val.max_love + "</td>";
-		elm += "<td hidden>" + val.skill_id + "</td><td hidden>" + val.hash + "</td>";
-		elm += "<td>" + val.date + "</td></tr>";
-	});
-	elm += '</table>';
-	elm += '</div>';
-	elm += '</div>';
-	
-	// 生成した要素を表示
-	$("#tableArea").html(elm);
-	// 検索ボタンを使用可能にする
-	$("#search-decide")[0].disabled = "";
 	
 	return false;
 }
