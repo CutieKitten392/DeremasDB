@@ -238,6 +238,9 @@ function submitIdolSearchForm() {
 			if(opt.cost != "%" && opt.cost != val.cost) {
 				return true;
 			}
+			if(opt.name != "" && !val.name.contains(opt.name)) {
+				return true;
+			}
 			
 			result.push(val);
 		});
