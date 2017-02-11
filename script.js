@@ -227,7 +227,9 @@ function submitIdolSearchForm() {
 	opt.limit = $('#limit')[0].value;
 	var result = new Array();
 	$.getJSON("idoldata.json", function(data) {
+		console.log(data);
 		$.each(data, function(index, val) {
+			console.log(val);
 			result.push(val);
 		});
 	});
