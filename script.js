@@ -231,6 +231,7 @@ function submitIdolSearchForm() {
 			result.push(val);
 		});
 	});
+	console.debug(result);
 	
 	// HTML形成
 	var elm = "";
