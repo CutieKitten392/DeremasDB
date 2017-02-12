@@ -54,10 +54,7 @@ function submitIdolSearchForm() {
 			if(opt.cost != "%" && opt.cost != val.cost) {
 				return true;
 			}
-			if(opt.name != "" && val.name.indexOf(opt.name) == -1) {
-				return true;
-			}
-			if(opt.name != "" && val.rubi.indexOf(opt.name) == -1) {
+			if(opt.name != "" && (val.name.indexOf(opt.name) == -1 && val.rubi.indexOf(opt.name) == -1)) {
 				return true;
 			}
 			
