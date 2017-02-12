@@ -77,6 +77,7 @@ function submitIdolSearchForm() {
 		});
 		
 		// ソート処理
+		/*
 		result.sort(function(a, b) {
 			var logic = opt.sort2 === "asc" ? -1 : 1;
 			switch (opt.sort) {
@@ -112,6 +113,7 @@ function submitIdolSearchForm() {
 					return Date.parse(a.date) < Date.parse(b.date) ? 1 * logic : -1 * logic;
 			}
 		});
+		*/
 		
 		// HTML形成
 		var elm = "";
