@@ -78,7 +78,7 @@ function submitIdolSearchForm() {
 		
 		// ソート処理
 		result.sort(function(a, b) {
-			var logic = opt.sort2 === "asc" ? 1 : -1;
+			var logic = opt.sort2 === "asc" ? -1 : 1;
 			switch (opt.sort) {
 				case "no":
 					return a.no < b.no ? 1 * logic : -1 * logic;
