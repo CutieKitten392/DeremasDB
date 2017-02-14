@@ -94,7 +94,7 @@ function submitIdolSearchForm() {
 			} else if(resultA > resultB) {
 				return -1 * logic;
 			}
-			return a.no < b.no ? 1 * logic : -1 * logic;
+			return a.no < b.no ? -1 : 1;
 		});
 		
 		// HTML形成
