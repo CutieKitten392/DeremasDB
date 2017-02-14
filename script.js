@@ -58,62 +58,44 @@ function submitIdolSearchForm() {
 				return true;
 			}
 			// アイドル名判定
-			var nameArray = opt.name.split(" ").concat(opt.name.split("　"));
-			var nameFlg = true;
+			var nameArray = opt.name.replace("　", " ").split(" ");
+			var nameFlg = 0;
 			for(var n=0; n<nameArray.length; n++) {
-				if(val.name.indexOf(opt.name) == -1 && val.rubi.indexOf(opt.name) == -1) {
-					if(opt.select === "AND") {
-						nameFlg &= false;
-					} else if(opt.select === "OR") {
-						nameFlg |= false;
-					} 
+				if(val.name.indexOf(nameArray[n]) != -1 || val.rubi.indexOf(nameArray[n]) != -1) {
+					nameFlg++;
 				}
 			}
-			if(!nameFlg) {
-				return true;
+			if(nameArray.length > 0) {
+				if(opt.select === "AND" && nameFlg != nameArray.length) {
+					return true;
+				}
+				if(opt.select === "OR" && nameFlg == 0) {
+					return true;
+				}
 			}
 			
 			result.push(val);
 		});
 		
 		// ソート処理
-		/*
 		result.sort(function(a, b) {
 			var logic = opt.sort2 === "asc" ? -1 : 1;
-			switch (opt.sort) {
-				case "no":
-					return a.no < b.no ? 1 * logic : -1 * logic;
-				case "cost":
-					return a.cost < b.cost ? 1 * logic : -1 * logic;
-				case "atk":
-					return a.atk < b.atk ? 1 * logic : -1 * logic;
-				case "def":
-					return a.def < b.def ? 1 * logic : -1 * logic;
-				case "atk+def":
-					return (a.atk+a.def) < (b.atk+b.def) ? 1 * logic : -1 * logic;
-				case "max_atk":
-					return a.max_atk < b.max_atk ? 1 * logic : -1 * logic;
-				case "max_def":
-					return a.max_def < b.max_def ? 1 * logic : -1 * logic;
-				case "max_atk+max_def":
-					return (a.max_atk+a.max_def) < (b.max_atk+b.max_def) ? 1 * logic : -1 * logic;
-				case "atk/cost":
-					return (a.atk/a.cost) < (b.atk/b.cost) ? 1 * logic : -1 * logic;
-				case "def/cost":
-					return (a.def/a.cost) < (b.def/b.cost) ? 1 * logic : -1 * logic;
-				case "(atk+def)/cost":
-					return ((a.atk+a.def)/a.cost) < ((b.atk+b.def)/b.cost) ? 1 * logic : -1 * logic;
-				case "max_atk/cost":
-					return (a.max_atk/a.cost) < (b.max_atk/b.cost) ? 1 * logic : -1 * logic;
-				case "max_def/cost":
-					return (a.max_def/a.cost) < (b.max_def/b.cost) ? 1 * logic : -1 * logic;
-				case "(max_atk+max_def)/cost":
-					return ((a.max_atk+a.max_def)/a.cost) < ((b.max_atk+b.max_def)/b.cost) ? 1 * logic : -1 * logic;
-				case "date":
-					return Date.parse(a.date) < Date.parse(b.date) ? 1 * logic : -1 * logic;
+			var regex = /elm/g;
+			var resultA, resultB;
+			if(opt.sort === "elm.date") {
+				resultA = Date.parse(a.date);
+				resultB = Date.parse(b.date);
+			} else {
+				resultA = parseFloat(eval(opt.sort.replace(regex, "a")));
+				resultB = parseFloat(eval(opt.sort.replace(regex, "b")));
 			}
+			if(resultA < resultB) {
+				return 1 * logic;
+			} else if(resultA > resultB) {
+				return -1 * logic;
+			}
+			return a.no < b.no ? 1 * logic : -1 * logic;
 		});
-		*/
 		
 		// HTML形成
 		var elm = "";

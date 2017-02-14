@@ -23,8 +23,6 @@
 
 				// 二重クリック抑止関数設定
 				$('.double-click-disable').on('click', function(elm) {
-					//console.log('execute');
-					//console.log(elm.target);
 					elm.target.disabled = 'disabled';
 					setTimeout(function(elm) {
 						elm.target.disabled = '';
@@ -126,21 +124,21 @@
 										<span class="input-group-addon">ソート条件</span>
 										<span>
 											<select id="sort" class="form-control">
-												<option value="no" >NO
-												<option value="cost" >コスト
-												<option value="atk" >攻撃値
-												<option value="def" >守備値
-												<option value="atk+def" >総合値
-												<option value="max_atk" >最大攻撃値
-												<option value="max_def" >最大守備値
-												<option value="max_atk+max_def" >最大総合値
-												<option value="atk/cost" >攻コス比
-												<option value="def/cost" >守コス比
-												<option value="(atk+def)/cost" >総コス比
-												<option value="max_atk/cost" >最大攻コス比
-												<option value="max_def/cost" >最大守コス比
-												<option value="(max_atk+max_def)/cost" >最大総コス比
-												<option value="date" >追加日
+												<option value="elm.no" >NO
+												<option value="elm.cost" >コスト
+												<option value="elm.atk" >攻撃値
+												<option value="elm.def" >守備値
+												<option value="elm.atk+elm.def" >総合値
+												<option value="elm.max_atk" >最大攻撃値
+												<option value="elm.max_def" >最大守備値
+												<option value="elm.max_atk+elm.max_def" >最大総合値
+												<option value="elm.atk/elm.cost" >攻コス比
+												<option value="elm.def/elm.cost" >守コス比
+												<option value="(elm.atk+elm.def)/elm.cost" >総コス比
+												<option value="elm.max_atk/elm.cost" >最大攻コス比
+												<option value="elm.max_def/elm.cost" >最大守コス比
+												<option value="(elm.max_atk+elm.max_def)/elm.cost" >最大総コス比
+												<option value="elm.date" >追加日
 											</select>
 											<select id="sort2" class="form-control">
 												<option value="asc" >昇順
